@@ -1,0 +1,1 @@
+# smapa-jekyll-theme
