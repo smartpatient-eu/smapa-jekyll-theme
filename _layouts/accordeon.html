@@ -67,7 +67,12 @@
             animation: ripple 600ms linear;
             background-color: rgba(0, 0, 0, 0.2);
         }
-
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
     </style>
 
 </head>
