@@ -92,8 +92,8 @@
       var diameter = Math.max(this.clientWidth, this.clientHeight);
       var radius = diameter / 2;
       circle.style.width = circle.style.height = diameter + "px";
-      circle.style.left = event.clientX - this.offsetLeft - radius + "px";
-      circle.style.top = event.clientY - this.offsetTop - radius + "px";
+      circle.style.left = event.pageX - this.offsetLeft - radius + "px";
+      circle.style.top = event.pageY - this.offsetTop - radius + "px";
       circle.classList.add("ripple");
       var ripple = this.getElementsByClassName("ripple")[0];
       if (ripple) {
