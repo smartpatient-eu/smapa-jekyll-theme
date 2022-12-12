@@ -83,6 +83,7 @@
 
 <script>
     function addRippleEffect(event) {
+        console.log('ripple', event.type, event);
         // Add ripple effect
         var circle = document.createElement("span");
         var diameter = Math.max(this.clientWidth, this.clientHeight);
@@ -103,10 +104,10 @@
         }
         this.appendChild(circle);
         event.preventDefault();  // If both touchstart and click are bound, prevent click from firing
-        event.stopPropagation();
     }
 
     function openAccordeon(event) {
+        console.log('accordeon', event.type, event);
         // Activate accordeon and toggle display of its panel
         this.classList.toggle("active");
         var panel = this.nextElementSibling;
@@ -116,7 +117,6 @@
             panel.style.display = "block";
         }
         event.preventDefault();  // If both touchstart and click are bound, prevent click from firing
-        event.stopPropagation();
     }
 
     var clickStartEvent = (function() {
@@ -127,7 +127,7 @@
         }
     })();
     var clickEndEvent = (function() {
-        if (typeof window.ontouchstart === 'undefined') {
+        if (typeof window.ontouchend === 'undefined') {
             return 'click';
         } else {
             return 'touchend';
