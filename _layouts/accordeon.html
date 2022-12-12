@@ -126,12 +126,19 @@
             return 'touchstart';
         }
     })();
+    var clickEndEvent = (function() {
+        if (typeof window.ontouchstart === 'undefined') {
+            return 'click';
+        } else {
+            return 'touchend';
+        }
+    })();
 
     var acc = document.getElementsByTagName("h2");
     var i;
     for (i = 0; i < acc.length; i++) {
         acc[i].addEventListener(clickStartEvent, addRippleEffect);
-        acc[i].addEventListener("click", openAccordeon);
+        acc[i].addEventListener(clickEndEvent, openAccordeon);
     }
 </script>
 
