@@ -82,35 +82,60 @@
 {{ content }}
 
 <script>
-  var acc = document.getElementsByTagName("h2");
-  var i;
+    function addRippleEffect(event) {
+        // Add ripple effect
+        var circle = document.createElement("span");
+        var diameter = Math.max(this.clientWidth, this.clientHeight);
+        var radius = diameter / 2;
+        circle.style.width = circle.style.height = diameter + "px";
+        var pageX = event.pageX;
+        var pageY = event.pageY;
+        if (event.type === 'touchstart') {
+            pageX = event.touches[0].pageX;
+            pageY = event.touches[0].pageY;
+        }
+        circle.style.left = pageX - this.offsetLeft - radius + "px";
+        circle.style.top = pageY - this.offsetTop - radius + "px";
+        circle.classList.add("ripple");
+        var ripple = this.getElementsByClassName("ripple")[0];
+        if (ripple) {
+            ripple.remove();
+        }
+        this.appendChild(circle);
+    }
 
-  for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function(event) {
-      // Add ripple effect
-      var circle = document.createElement("span");
-      var diameter = Math.max(this.clientWidth, this.clientHeight);
-      var radius = diameter / 2;
-      circle.style.width = circle.style.height = diameter + "px";
-      circle.style.left = event.pageX - this.offsetLeft - radius + "px";
-      circle.style.top = event.pageY - this.offsetTop - radius + "px";
-      circle.classList.add("ripple");
-      var ripple = this.getElementsByClassName("ripple")[0];
-      if (ripple) {
-        ripple.remove();
-      }
-      this.appendChild(circle);
+    function openAccordeon(event) {
+        // Activate accordeon and toggle display of its panel
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+            panel.style.display = "none";
+        } else {
+            panel.style.display = "block";
+        }
+    }
 
-      // Activate accordeon and toggle display of its panel
-      this.classList.toggle("active");
-      var panel = this.nextElementSibling;
-      if (panel.style.display === "block") {
-        panel.style.display = "none";
-      } else {
-        panel.style.display = "block";
-      }
-    });
-  }
+    var clickStartEvent = (function() {
+        if (typeof window.ontouchstart === 'undefined') {
+            return 'click';
+        } else {
+            return 'touchstart';
+        }
+    })();
+    var clickEndEvent = (function() {
+        if (typeof window.ontouchstart === 'undefined') {
+            return 'click';
+        } else {
+            return 'touchend';
+        }
+    })();
+
+    var acc = document.getElementsByTagName("h2");
+    var i;
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener(clickStartEvent, addRippleEffect);
+        acc[i].addEventListener(clickEndEvent, openAccordeon);
+    }
 </script>
 
 </body>
