@@ -102,6 +102,8 @@
             ripple.remove();
         }
         this.appendChild(circle);
+        event.preventDefault();  // If both touchstart and click are bound, prevent click from firing
+        event.stopPropagation();
     }
 
     function openAccordeon(event) {
@@ -113,6 +115,8 @@
         } else {
             panel.style.display = "block";
         }
+        event.preventDefault();  // If both touchstart and click are bound, prevent click from firing
+        event.stopPropagation();
     }
 
     var clickStartEvent = (function() {
