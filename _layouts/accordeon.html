@@ -83,7 +83,6 @@
 
 <script>
     function addRippleEffect(event) {
-        console.log('ripple', event.type, event);
         // Add ripple effect
         var circle = document.createElement("span");
         var diameter = Math.max(this.clientWidth, this.clientHeight);
@@ -107,7 +106,6 @@
     }
 
     function toggleAccordeon(event) {
-        console.log('accordeon', event.type, event);
         // Activate accordeon and toggle display of its panel
         this.classList.toggle("active");
         var panel = this.nextElementSibling;
@@ -139,9 +137,6 @@
     for (i = 0; i < acc.length; i++) {
         acc[i].addEventListener(clickStartEvent, addRippleEffect);
         acc[i].addEventListener(clickEndEvent, toggleAccordeon);
-        acc[i].addEventListener('touccancelled', function(event) {
-            console.log('cancelled', event.type, event);
-        });
     }
 </script>
 
