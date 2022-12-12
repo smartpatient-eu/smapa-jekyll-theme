@@ -106,7 +106,7 @@
         event.preventDefault();  // If both touchstart and click are bound, prevent click from firing
     }
 
-    function openAccordeon(event) {
+    function toggleAccordeon(event) {
         console.log('accordeon', event.type, event);
         // Activate accordeon and toggle display of its panel
         this.classList.toggle("active");
@@ -138,7 +138,10 @@
     var i;
     for (i = 0; i < acc.length; i++) {
         acc[i].addEventListener(clickStartEvent, addRippleEffect);
-        acc[i].addEventListener(clickEndEvent, openAccordeon);
+        acc[i].addEventListener(clickEndEvent, toggleAccordeon);
+        acc[i].addEventListener('touccancelled', function(event) {
+            console.log('cancelled', event.type, event);
+        });
     }
 </script>
 
